@@ -57,13 +57,15 @@ public class SeguroService
         var seguros = await _repo.GetAllAsync(ct);
 
         if (seguros.Count == 0)
-            return new RelatorioMediaSegurosResponse(0, 0);
+            return new RelatorioMediaSegurosResponse(0, 0, 0);
 
-        var media = seguros.Average(s => s.ValorSeguro);
+        var mediaSeguro = seguros.Average(s => s.ValorSeguro);
+        var mediaVeiculo = seguros.Average(s => s.Veiculo.Valor);
 
         return new RelatorioMediaSegurosResponse(
             seguros.Count,
-            Math.Round(media, 2, MidpointRounding.AwayFromZero)
+            Math.Round(mediaSeguro, 2, MidpointRounding.AwayFromZero),
+            Math.Round(mediaVeiculo, 2, MidpointRounding.AwayFromZero)
         );
     }
 

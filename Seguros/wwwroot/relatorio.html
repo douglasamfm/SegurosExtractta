@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Relatório de Seguros</title>
+    <style>
+        body {
+            font-family: Arial;
+            padding: 40px;
+            background: #f5f5f5;
+        }
+
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            width: 300px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            margin-top: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <h2>Relatório Médio</h2>
+        <p>Média Valor Veículos: <b id="mediaVeiculo">Carregando...</b></p>
+        <p>Média Valor Seguro: <b id="mediaSeguro">Carregando...</b></p>
+    </div>
+
+    <script>
+fetch("/api/seguros/relatorio/media")
+.then(res => res.json())
+.then(data => {
+    document.getElementById("mediaVeiculo").innerText = data.mediaValorVeiculo;
+    document.getElementById("mediaSeguro").innerText = data.mediaValorSeguro;
+})
+.catch(err => console.error(err));
+    </script>
+
+</body>
+</html>

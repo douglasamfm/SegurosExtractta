@@ -31,6 +31,8 @@ using (var scope = app.Services.CreateScope())
     db.Database.EnsureCreated();
 }
 
+app.UseStaticFiles();
+
 // Swagger
 if (app.Environment.IsDevelopment())
 {
